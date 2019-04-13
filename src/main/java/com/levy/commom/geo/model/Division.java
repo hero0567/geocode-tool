@@ -12,11 +12,11 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Division {
     @JsonProperty("adcode")
-    private String adCode;
+    private String adcode;
     @JsonProperty("center")
     private String center;
     @JsonProperty("citycode")
-    private String cityCode;
+    private String citycode;
     @JsonProperty("level")
     private String level;
     private String name;

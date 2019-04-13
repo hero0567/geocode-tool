@@ -22,7 +22,7 @@ public class DivisionDataLoader {
 
     public Map<String, List<Division>> load() {
 
-        URL url = getClass().getClassLoader().getResource("administrativeDivisions");
+        URL url = getClass().getClassLoader().getResource("divisions");
         if (isNull(url)) {
             log.warn("No resource found in classpath.");
             return emptyMap();

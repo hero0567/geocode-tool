@@ -30,7 +30,7 @@ public class AdminAreaFetchTool {
                 "keywords=";
 
         Set<Division> districts = new HashSet<>();
-        getDistrictLevel(url, "成都市", districts);
+        getDistrictLevel(url, "成都", districts);
         saveToLocal(districts);
         System.out.println(districts);
     }
@@ -43,18 +43,23 @@ public class AdminAreaFetchTool {
                 "keywords=";
         for (Division d : districts) {
             System.out.println("Query with:" + d.getName());
-            String result = sendHttp(url + d.getName());
-            saveToFile(d, result);
+            String fileName = d.getAdcode() + "_" + d.getName() + "_" + d.getCitycode() + ".json";
+            Path target = Paths.get("src", "main", "resources", "divisions", fileName);
+            if (Files.notExists(target)) {
+                String result = sendHttp(url + d.getName());
+                saveToFile(target, result);
+            }
         }
     }
 
-    public static void saveToFile(Division d, String content) {
-        String fileName = d.getAdCode() + "_" + d.getName() + "_" + d.getCityCode() + ".json";
-        Path target = Paths.get(fileName);
+    public static void saveToFile(Path target, String content) {
         try {
             if (Files.notExists(target)) {
                 Files.createFile(target);
-                log.info("Generate new file with name:" + fileName);
+                log.info("Generate new file with name:" + target.getFileName());
+            } else {
+                log.info("File already existed with name:" + target.getFileName());
+                return;
             }
             BufferedWriter writer = Files.newBufferedWriter(target, StandardCharsets.UTF_8);
             writer.write(content);
@@ -99,7 +104,8 @@ public class AdminAreaFetchTool {
                 result.append(line + "\n");
             }
             connection.disconnect();
-            return result.toString();
+            String replaceResult = result.toString().replaceAll("\"citycode\":\\[\\]", "\"citycode\":\"\"");
+            return replaceResult;
         } catch (Exception e) {
             e.printStackTrace();
         }

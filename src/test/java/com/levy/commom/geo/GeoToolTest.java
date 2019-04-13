@@ -63,14 +63,15 @@ public class GeoToolTest {
                 "location=";
 
 
-        int latDiff = 53 - 12;
-        int lonDiff = 123 - 74;
-        for (int i = 0; i < 30; i++) {
+        int latDiff = 53 - 12;  //max latitude and min latitude
+        int lonDiff = 123 - 74; //max longitude and min longitude
+        for (int i = 0; i < 3; i++) {
+            //generate latitude between 12-53 with five-digit decimal point
+            //generate longitude between 74-123 with five-digit decimal point
             String lat = 12 + random.nextInt(latDiff) + decimalFormat.format(random.nextDouble());
             String lon = 74 + random.nextInt(lonDiff) + decimalFormat.format(random.nextDouble());
             System.out.println(lon + "," + lat);
             String district = sendHttp(uri + lon + "," + lat);
-
             Division division = geoTool.findDivisionByLonLat(Double.valueOf(lon), Double.valueOf(lat));
             if (division == null) {
                 Assert.assertEquals(district, "[]");
