@@ -65,7 +65,7 @@ public class GeoToolTest {
 
         int latDiff = 53 - 12;  //max latitude and min latitude
         int lonDiff = 123 - 74; //max longitude and min longitude
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 100; i++) {
             //generate latitude between 12-53 with five-digit decimal point
             //generate longitude between 74-123 with five-digit decimal point
             String lat = 12 + random.nextInt(latDiff) + decimalFormat.format(random.nextDouble());

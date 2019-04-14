@@ -30,7 +30,7 @@ public class AdminAreaFetchTool {
                 "keywords=";
 
         Set<Division> districts = new HashSet<>();
-        getDistrictLevel(url, "成都", districts);
+        getDistrictLevel(url, "中国", districts);
         saveToLocal(districts);
         System.out.println(districts);
     }

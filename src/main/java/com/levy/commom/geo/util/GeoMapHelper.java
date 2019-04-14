@@ -14,7 +14,7 @@ public class GeoMapHelper {
 
 
     public static void addDivision(Map<String, List<Division>> roundGeoMap, Division d) {
-        if (!DivisionLevel.DISTRICT.equals(d.getLevel())){
+        if (!"district".equals(d.getLevel())) {
             return;
         }
 

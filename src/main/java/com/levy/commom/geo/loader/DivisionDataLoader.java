@@ -43,7 +43,7 @@ public class DivisionDataLoader {
             }
             try {
                 Division division = objectMapper.readValue(file, Division.class);
-                GeoMapHelper.addDivision(roundGeoMap, division);
+                GeoMapHelper.addDivision(roundGeoMap, division.getDistricts().get(0));
             } catch (IOException e) {
                 log.error("Failed load raw file: {}", file.getName());
             }
